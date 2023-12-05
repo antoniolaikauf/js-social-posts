@@ -38,7 +38,8 @@ const posts = [
         "media": "https://unsplash.it/600/400?image=24",
         "author": {
             "name": "Luca Formicola",
-            "image": null
+            "image": "https://unsplash.it/300/300?image=29" 
+            // qua ci deve essere null
         },
         "likes": 56,
         "created": "2021-04-03"
@@ -98,3 +99,28 @@ posts.forEach((elementi)=>{
 
     document.getElementById("container").innerHTML+=card;
 })
+
+
+// evento per aggiungere caratteristiche al bottone mi piace 
+// messi tutti classi dentro un array
+let button=document.getElementsByClassName("js-like-button");
+
+// console.log(button);
+
+// let textButton=document.querySelector(".like-button__label")
+
+// ciclo per classi dentro all'array button
+for (let i = 0; i < button.length; i++) {
+    
+    elementi = button[i]
+    console.log(elementi);
+    eleSpecifico(elementi)
+}
+// funzione per dare la classe all'elemento specifico
+function eleSpecifico(items) {
+    items.addEventListener("click",function () {
+        items.classList.add("like-cliccato")
+    })
+}
+
+ 
