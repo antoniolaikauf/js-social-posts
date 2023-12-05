@@ -38,8 +38,8 @@ const posts = [
         "media": "https://unsplash.it/600/400?image=24",
         "author": {
             "name": "Luca Formicola",
-            "image": null
-            
+            "image": "https://unsplash.it/300/300?image=20"
+            // qua va null
         },
         "likes": 56,
         "created": "2021-04-03"
@@ -133,17 +133,14 @@ function eleSpecifico(items ,ogg,text) {
         // funzione cambio numero di likes
         like(ogg,text)
 
-        return items.classList.add("like-cliccato")
+        return items.classList.toggle("like-cliccato")
     })
 }
 
 
-// funzione per cambiare il numero di likes
 function like(nOggetto, nLikes) {
-    let {likes}=nOggetto
-    likes++
-         
-     return nLikes.innerHTML=likes
- }
-
-
+   let {likes}=nOggetto
+   likes++
+        
+    return nLikes.innerHTML=likes
+}
