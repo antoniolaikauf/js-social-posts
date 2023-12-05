@@ -38,8 +38,8 @@ const posts = [
         "media": "https://unsplash.it/600/400?image=24",
         "author": {
             "name": "Luca Formicola",
-            "image": "https://unsplash.it/300/300?image=29" 
-            // qua ci deve essere null
+            "image": null
+            
         },
         "likes": 56,
         "created": "2021-04-03"
@@ -63,7 +63,6 @@ const posts = [
 posts.forEach((elementi)=>{
     const {id,content,media,author,likes,created}=elementi
     const {name,image}=author
-    
    const card =  `
         <div class="post">
             <div class="post__header">
@@ -101,26 +100,49 @@ posts.forEach((elementi)=>{
 })
 
 
-// evento per aggiungere caratteristiche al bottone mi piace 
 // messi tutti classi dentro un array
 let button=document.getElementsByClassName("js-like-button");
 
 // console.log(button);
 
-// let textButton=document.querySelector(".like-button__label")
+let textButton=document.getElementsByClassName("js-likes-counter")
+console.log(textButton);
 
 // ciclo per classi dentro all'array button
-for (let i = 0; i < button.length; i++) {
-    
-    elementi = button[i]
-    console.log(elementi);
-    eleSpecifico(elementi)
-}
+for (let i = 0; i < posts.length; i++) {
+    // elementi dentro all'array post
+   let oggeti = posts[i]
+
+    // array di stesse classi per cambiare il colore del bottone
+   let elementi = button[i]
+
+    // array di piu classi con lo stesso nome per cambiare il n likes
+    let textChange=textButton[i];
+
+    // funzione con dentro i cambiamenti
+    eleSpecifico(elementi,oggeti,textChange);
+
+};
+
 // funzione per dare la classe all'elemento specifico
-function eleSpecifico(items) {
+function eleSpecifico(items ,ogg,text) {
+    
+    // evento per aggiungere caratteristiche al bottone mi piace 
     items.addEventListener("click",function () {
-        items.classList.add("like-cliccato")
+
+        // funzione cambio numero di likes
+        like(ogg,text)
+
+        return items.classList.add("like-cliccato")
     })
 }
 
- 
+
+// funzione per cambiare il numero di likes
+function like(nOggetto, nLikes) {
+    nOggetto.likes=nOggetto.likes+1
+        
+    return nLikes.innerHTML=nOggetto.likes
+}
+
+
