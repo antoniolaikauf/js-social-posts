@@ -134,7 +134,7 @@ function eleSpecifico(items ,ogg,text) {
         // funzione cambio numero di likes
         like(ogg,text)
 
-        return items.classList.add("like-cliccato")
+        return items.classList.add("like-button--liked")
     })
 }
 
