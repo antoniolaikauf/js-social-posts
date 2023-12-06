@@ -56,22 +56,29 @@ const posts = [
     }
 ];
 
-// posts[3].author.image="ciao"
-
-// console.log(posts[3].author.image="ciao");
-
 
 
 // loop per far mettere card dntro html
 
 posts.forEach((elementi)=>{
-    const {id,content,media,author,likes,created}=elementi
-    const {name,image}=author
+    let {id,content,media,author,likes,created}=elementi
+    let {name,image}=author
 
+    // riordinato il numero della giornata
+    let data = new Date(created)
+
+    let giorno = data.getDate()
+
+
+    let mese = data.getMonth()
+
+    let anno =data.getFullYear()
+
+
+    created= giorno +" - " + mese + " - " + anno ;
+    
 
     let card;
-
-
 
     card =  `
         <div class="post">
@@ -109,9 +116,7 @@ posts.forEach((elementi)=>{
 //    riga 118 non fattibile essendo che se il nome cambia esce sbagliato
 
    if (author.image === null) {
-       let {name,image}=author
-       image = "ciaoooooo"
-       console.log(image);
+       let {name}=author
          card =  `
             <div class="post">
                 <div class="post__header">
