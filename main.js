@@ -128,8 +128,9 @@ for (let i = 0; i < posts.length; i++) {
 function eleSpecifico(items ,ogg,text) {
     
     // evento per aggiungere caratteristiche al bottone mi piace 
-    items.addEventListener("click",function () {
-
+    items.addEventListener("click",function (Event) {
+        // evita che torni sempre alla pagina
+        Event.preventDefault()
         // funzione cambio numero di likes
         like(ogg,text)
 
@@ -145,5 +146,3 @@ function like(nOggetto, nLikes) {
          
      return nLikes.innerHTML=likes
  }
-
-
