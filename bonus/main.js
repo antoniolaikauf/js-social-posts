@@ -38,8 +38,7 @@ const posts = [
         "media": "https://unsplash.it/600/400?image=24",
         "author": {
             "name": "Luca Formicola",
-            "image": "https://unsplash.it/300/300?image=20"
-            // qua va null
+            "image": null
         },
         "likes": 56,
         "created": "2021-04-03"
@@ -57,18 +56,29 @@ const posts = [
     }
 ];
 
+// posts[3].author.image="ciao"
+
+// console.log(posts[3].author.image="ciao");
+
+
 
 // loop per far mettere card dntro html
 
 posts.forEach((elementi)=>{
     const {id,content,media,author,likes,created}=elementi
     const {name,image}=author
-   const card =  `
+
+
+    let card;
+
+
+
+    card =  `
         <div class="post">
             <div class="post__header">
                 <div class="post-meta">                    
                     <div class="post-meta__icon">
-                        <img class="profile-pic" src="${image}" alt="Phil Mangione">                    
+                        <img class="profile-pic" src="${image}" alt="${name}">                    
                     </div>
                     <div class="post-meta__data">
                         <div class="post-meta__author"${name}</div>
@@ -96,7 +106,52 @@ posts.forEach((elementi)=>{
         </div>
    `;
 
-    document.getElementById("container").innerHTML+=card;
+//    riga 118 non fattibile essendo che se il nome cambia esce sbagliato
+
+   if (author.image === null) {
+       let {name,image}=author
+       image = "ciaoooooo"
+       console.log(image);
+         card =  `
+            <div class="post">
+                <div class="post__header">
+                    <div class="post-meta">                    
+                        <div class="post-meta__icon">
+
+                                    ${name.substring(0,1)}
+                                    ${name.substring(5,6)}
+                        </div>
+                        <div class="post-meta__data">
+                            <div class="post-meta__author"${name}</div>
+                            <div class="post-meta__time">${created}</div>
+                        </div>                    
+                    </div>
+                </div>
+                <div class="post__text">${content}</div>
+                <div class="post__image">
+                    <img src="${media}" alt="">
+                </div>
+                <div class="post__footer">
+                    <div class="likes js-likes">
+                        <div class="likes__cta">
+                            <a class="like-button  js-like-button" href="#" data-postid="${id}">
+                                <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                                <span class="like-button__label">Mi Piace</span>
+                            </a>
+                        </div>
+                        <div class="likes__counter">
+                            Piace a <b id="like-counter-1" class="js-likes-counter">${likes}</b> persone
+                        </div>
+                    </div> 
+                </div>            
+            </div>
+    `;
+
+
+    }
+
+
+    document.getElementById("container").innerHTML+=card
 })
 
 
@@ -127,9 +182,11 @@ for (let i = 0; i < posts.length; i++) {
 // funzione per dare la classe all'elemento specifico
 function eleSpecifico(items ,ogg,text) {
     
+   
     // evento per aggiungere caratteristiche al bottone mi piace 
-    items.addEventListener("click",function () {
+    items.addEventListener("click",function (Event) {
 
+        Event.preventDefault()
         // funzione cambio numero di likes
         like(ogg,text)
 
